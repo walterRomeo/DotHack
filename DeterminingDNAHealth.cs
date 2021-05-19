@@ -37,22 +37,23 @@ namespace DeterminingDNAHealth
 
             foreach (var dna in strands)
             {
-                Dictionary<string, int> genesToSearch = new Dictionary<string, int>();
+                int check = 0;
                 for (int i = dna.First; i <= dna.Last; i++)
                 {
-                    genesToSearch.TryAdd(gene[i], health[i]);
-                }
-                int check = dna.HealthCheck(genesToSearch);
-                if (check < unhealthiest)
-                {
-                    unhealthiest = check;
-                }
-                if (check > healthiest)
-                {
-                    healthiest = check;
-                }
+                    check += dna.HealthCheck(gene[i], health[i]);
+
+
+                }   
+                     if (check < unhealthiest)
+                    {
+                        unhealthiest = check;
+                    }
+                    if (check > healthiest)
+                    {
+                        healthiest = check;
+                    }
             }
-            Console.WriteLine("{0} {1}",unhealthiest, healthiest);
+            Console.WriteLine("{0} {1}", unhealthiest, healthiest);
 
         }
 
@@ -71,23 +72,66 @@ namespace DeterminingDNAHealth
             Strand = strand;
         }
 
-        public int HealthCheck(Dictionary<string, int> gene)
+        public int HealthCheck(string geneToCheck, int hValue)
         {
             int healthValue = 0;
-            foreach (var gh in gene)
+            //Console.WriteLine($"{geneCheck}: {checkLength}");
+            //Find all instances of the current gene being searched for
+
+            if(Strand.Contains(geneToCheck))
             {
-                string geneCheck = gh.Key;
-                int healthStat = gh.Value;
-                int checkLength = geneCheck.Length;
-                Console.WriteLine($"{geneCheck}: {checkLength}");
-                //Find all instances of the current gene being searched for
-                if(Strand.Contains(geneCheck))
+                healthValue += hValue * CheckForMore(geneToCheck,geneToCheck.Length);
+                   
+            }
+
+            Console.WriteLine("Here " + healthValue);
+            return healthValue;
+        }
+
+        public int CheckForMore(string gene, int geneLength)
+        {
+            int moreFound = 0;
+            var token = Strand;
+            
+            for(int i= 0; i < token.Length; i++)
+            {
+                if(token[i] == gene[0])
                 {
-                    healthValue += healthStat;
+                    if(geneLength > 1)
+                    {
+                        int j = 1;
+                        bool match = false;
+                        if((i + geneLength) < token.Length)
+                        {
+                            while(j < geneLength)
+                            {
+                                if(token[i+j] == gene[j])
+                                {
+                                    match = true;
+                                }
+                                else
+                                {
+                                    match = false;
+                                }
+                                j++;
+                            }
+                            if(match == true)
+                            {
+                                moreFound++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        moreFound++;
+                    }
+
                 }
             }
 
-            return healthValue;
+
+
+            return moreFound;
         }
     }
 }

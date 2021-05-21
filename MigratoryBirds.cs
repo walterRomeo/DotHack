@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace MigratoryBirds
 {
-
     class Program
     {
         static int migratoryBirds(List<int> arr)

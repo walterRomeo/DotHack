@@ -78,7 +78,7 @@ namespace DeterminingDNAHealth
             {
                 healthValue += hValue * CheckForMore(geneToCheck,geneToCheck.Length);
             }
-            Console.WriteLine("Here " + healthValue);
+            //Console.WriteLine("Here " + healthValue);
             return healthValue;
         }
 

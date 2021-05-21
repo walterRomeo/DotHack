@@ -8,6 +8,7 @@ namespace MigratoryBirds
 {
     class Program
     {
+        //My solution to the problem
         static int migratoryBirds(List<int> arr)
         {
             int count = 0;

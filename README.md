@@ -1,7 +1,7 @@
 # Solutions for Hacker Rank problems.
 
 ## Easy problems
--Migratory Birds https://www.hackerrank.com/challenges/migratory-birds/problem?h_r=profile
+- Migratory Birds https://www.hackerrank.com/challenges/migratory-birds/problem?h_r=profile
 
 
 

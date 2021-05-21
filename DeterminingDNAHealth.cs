@@ -26,10 +26,11 @@ namespace DeterminingDNAHealth
                 DNAStrand strand = new DNAStrand(first, last, d);
                 dna.Add(strand);
             }
-
+            //Find and print unhealthiest and healthiest strands from the sample input
             PrintStats(n, genes, health, s, dna);
         }
 
+        // Method to compare gene against the strands. 
         public static void PrintStats(int n, List<string> gene, List<int> health, int s, List<DNAStrand> strands)
         {
             int unhealthiest = int.MaxValue;
@@ -41,23 +42,18 @@ namespace DeterminingDNAHealth
                 for (int i = dna.First; i <= dna.Last; i++)
                 {
                     check += dna.HealthCheck(gene[i], health[i]);
-
-
                 }   
-                     if (check < unhealthiest)
-                    {
-                        unhealthiest = check;
-                    }
-                    if (check > healthiest)
-                    {
-                        healthiest = check;
-                    }
+                if (check < unhealthiest)
+                {
+                   unhealthiest = check;
+                }
+                if (check > healthiest)
+                {
+                    healthiest = check;
+                }
             }
             Console.WriteLine("{0} {1}", unhealthiest, healthiest);
-
         }
-
-
     }
 
     class DNAStrand
@@ -81,9 +77,7 @@ namespace DeterminingDNAHealth
             if(Strand.Contains(geneToCheck))
             {
                 healthValue += hValue * CheckForMore(geneToCheck,geneToCheck.Length);
-                   
             }
-
             Console.WriteLine("Here " + healthValue);
             return healthValue;
         }
@@ -125,12 +119,8 @@ namespace DeterminingDNAHealth
                     {
                         moreFound++;
                     }
-
                 }
             }
-
-
-
             return moreFound;
         }
     }

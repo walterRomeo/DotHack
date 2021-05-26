@@ -4,12 +4,46 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Globalization;
+using System.Text;
 
 namespace DeterminingDNAHealth
 {
     class Solution
     {
         public static void Main(string[] args)
+        {
+            //Take in data from console input
+            InputConsoleData();
+            //Read from the first file passed in through command line if it exists for testing failed cases
+            if (args[0] != null)
+            {
+                if (File.Exists(args[0]))
+                {
+                    var fileStreamer = File.OpenText(args[0]);
+                    int n = Convert.ToInt32(fileStreamer.ReadLine().Trim());
+                    List<string> genes = fileStreamer.ReadLine().TrimEnd().Split(' ').ToList();
+                    List<int> health = fileStreamer.ReadLine().TrimEnd().Split(' ').ToList().Select(healthTemp => Convert.ToInt32(healthTemp)).ToList();
+
+                    int s = Convert.ToInt32(fileStreamer.ReadLine().Trim());
+                    List<DNAStrand> dna = new List<DNAStrand>();
+                    for (int sItr = 0; sItr < s; sItr++)
+                    {
+                        string[] firstMultipleInput = fileStreamer.ReadLine().TrimEnd().Split(' ');
+                        int first = Convert.ToInt32(firstMultipleInput[0]);
+                        int last = Convert.ToInt32(firstMultipleInput[1]);
+                        string d = firstMultipleInput[2];
+                        DNAStrand strand = new DNAStrand(first, last, d);
+                        dna.Add(strand);
+                    }
+                    //Find and print unhealthiest and healthiest strands from the sample input
+                    PrintStats(n, genes, health, s, dna);
+                }
+
+
+            }
+        }
+
+        public static void InputConsoleData()
         {
             int n = Convert.ToInt32(Console.ReadLine().Trim());
             List<string> genes = Console.ReadLine().TrimEnd().Split(' ').ToList();
@@ -42,10 +76,10 @@ namespace DeterminingDNAHealth
                 for (int i = dna.First; i <= dna.Last; i++)
                 {
                     check += dna.HealthCheck(gene[i], health[i]);
-                }   
+                }
                 if (check < unhealthiest)
                 {
-                   unhealthiest = check;
+                    unhealthiest = check;
                 }
                 if (check > healthiest)
                 {
@@ -53,6 +87,7 @@ namespace DeterminingDNAHealth
                 }
             }
             Console.WriteLine("{0} {1}", unhealthiest, healthiest);
+
         }
     }
 
@@ -74,9 +109,9 @@ namespace DeterminingDNAHealth
             //Console.WriteLine($"{geneCheck}: {checkLength}");
             //Find all instances of the current gene being searched for
 
-            if(Strand.Contains(geneToCheck))
+            if (Strand.Contains(geneToCheck))
             {
-                healthValue += hValue * CheckForMore(geneToCheck,geneToCheck.Length);
+                healthValue += hValue * CheckForMore(geneToCheck, geneToCheck.Length);
             }
             //Console.WriteLine("Here " + healthValue);
             return healthValue;
@@ -86,20 +121,20 @@ namespace DeterminingDNAHealth
         {
             int moreFound = 0;
             var token = Strand;
-            
-            for(int i= 0; i < token.Length; i++)
+
+            for (int i = 0; i < token.Length; i++)
             {
-                if(token[i] == gene[0])
+                if (token[i] == gene[0])
                 {
-                    if(geneLength > 1)
+                    if (geneLength > 1)
                     {
                         int j = 1;
-                        bool match = false;
-                        if((i + geneLength) < token.Length)
+                        bool match = true;
+                        if ((i + geneLength) <= token.Length)
                         {
-                            while(j < geneLength)
+                            while (j < geneLength && match == true)
                             {
-                                if(token[i+j] == gene[j])
+                                if (token[i + j] == gene[j])
                                 {
                                     match = true;
                                 }
@@ -109,7 +144,7 @@ namespace DeterminingDNAHealth
                                 }
                                 j++;
                             }
-                            if(match == true)
+                            if (match == true)
                             {
                                 moreFound++;
                             }

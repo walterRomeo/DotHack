@@ -1,5 +1,6 @@
 # Solutions for Hacker Rank problems.
-The following are solutions to problems found at Hacker Rank: https://www.hackerrank.com/.
+The following are solutions to problems found at Hacker Rank: https://www.hackerrank.com/
+
 C# is selected as the language being solved for as I am learning and practicing using dotnet core and other features of the language
 ## Easy Problems
 - Migratory Birds https://www.hackerrank.com/challenges/migratory-birds/problem?h_r=profile

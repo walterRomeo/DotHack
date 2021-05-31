@@ -12,6 +12,7 @@ C# is selected as the language being solved for as I am learning and practicing 
 - Number Line Jumps https://www.hackerrank.com/challenges/kangaroo/problem?h_r=internal-search
 - Reduced String https://www.hackerrank.com/challenges/reduced-string/problem?h_r=internal-search
 - Repeated String https://www.hackerrank.com/challenges/repeated-string/problem?h_r=internal-search
+- String Construction https://www.hackerrank.com/challenges/string-construction/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
 - Strong Password https://www.hackerrank.com/challenges/strong-password/problem?h_r=internal-search
 - Subarray Division https://www.hackerrank.com/challenges/the-birthday-bar/problem?h_r=internal-search
 
